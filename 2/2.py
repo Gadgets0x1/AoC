@@ -2,6 +2,10 @@
 #(BY) Paper    2 (X)Rock    1 = 3
 #(CZ) Scissors 3 (Y)Paper   2 = 5
 
+# X  lose, 
+# Y  draw,
+# Z  win.
+
 def gameRound(p1: str, p2: str) -> int:
     if( (p1 == 'A' and p2 == 'Z')or
         (p1 == 'B' and p2 == 'X')or
@@ -25,11 +29,12 @@ def totalScore(shapeScore: int, outcomeScore: int) -> int:
     total = shapeScore + outcomeScore
     return total
 
-with open('./game.txt', 'r') as players:
-    players = players.read().splitlines()
+with open('./game.txt', 'r') as p:
+    players = p.read().splitlines()
     t=0
     for player in players:
         playerOne = player[0]
         playerTwo = player[2]
         t = t + totalScore(gameRound(playerOne,playerTwo),shapeScore(playerTwo))
     print(t)
+    p.close()
