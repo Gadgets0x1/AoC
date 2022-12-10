@@ -13,3 +13,4 @@ with open('./elves', 'r') as f:
             count=count+1
             calories = 0
     print(mostCalories)
+    f.close()
