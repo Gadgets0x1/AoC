@@ -10,11 +10,6 @@ def charValue(v: str) -> int:
     
     return value
 
-def upperCaseValue(v: str) -> int:
-    upper = list(string.ascii_uppercase)
-    value = (upper.index(v))+27
-    return value
-
 def splitSack(rucksackItems: list) -> list:
     half = int((len(rucksackItems))/2)
     ruck = rucksackItems[0:half], rucksackItems[half:]
@@ -25,31 +20,31 @@ def getDubblet(rucksack: list)-> str:
     character = [str(i) for i in char][0]
     return character
 
-def groupBadge(groups: list) -> int :
+def groupBadge(groups: list) -> str :
     badgeInSet = set(groups[0]) & set(groups[1]) & set(groups[2])
-    badgeStr = [str(i) for i in badgeInSet][0]
-    return badgeStr
+    badgeCharacter = [str(i) for i in badgeInSet][0]
+    return badgeCharacter
 
 with open('./data.txt', 'r') as d:
     data = d.read().splitlines()
-    rsum = 0
+    rucksackSum = 0
+    badgeSum = 0
     badgeGroupList = []
-    bsum = 0
     for items in data:
         #----First
         rucksack = splitSack(items)
-        char = getDubblet(rucksack)
-        rsum = rsum + charValue(char)
+        itemType = getDubblet(rucksack)
+        rucksackSum += charValue(itemType)
         #----
 
         #----Second
         badgeGroupList.append(items)
         if(len(badgeGroupList) % 3 == 0):
             badge = groupBadge(badgeGroupList)
-            bsum = bsum + charValue(badge)
+            badgeSum += charValue(badge)
             badgeGroupList.clear()
 
 
         #----
-    print(rsum)
-    print(bsum)
+    print(rucksackSum)
+    print(badgeSum)
